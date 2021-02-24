@@ -8,6 +8,7 @@ namespace RomanNumbersTests
   {
     [Theory()]
     [InlineData(1, "I")]
+    [InlineData(2, "II")]
     public void ShouldConvertArabicNumber(int arabicNumber, string expectedRomanNumber)
     {
       var converter = new ToRomanNumberConverter();
@@ -22,7 +23,14 @@ namespace RomanNumbersTests
   {
     public string Convert(int arabicNumber)
     {
-      return "I";
+      string romanNumber = "I";
+
+      if (arabicNumber > 1)
+      {
+        romanNumber += "I";
+      }
+
+      return romanNumber;
     }
   }
 }
