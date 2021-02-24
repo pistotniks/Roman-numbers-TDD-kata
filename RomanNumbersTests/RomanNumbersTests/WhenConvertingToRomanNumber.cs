@@ -10,6 +10,7 @@ namespace RomanNumbersTests
     [InlineData(1, "I")]
     [InlineData(2, "II")]
     [InlineData(3, "III")]
+    [InlineData(4, "IV")]
     public void ShouldConvertArabicNumber(int arabicNumber, string expectedRomanNumber)
     {
       var converter = new ToRomanNumberConverter();
@@ -22,7 +23,7 @@ namespace RomanNumbersTests
 
   public class ToRomanNumberConverter
   {
-    public static readonly string[] RomanNumbers = { "I", "II", "III" };
+    public static readonly string[] RomanNumbers = { "I", "II", "III", "IV" };
 
     public string Convert(int arabicNumber)
     {
