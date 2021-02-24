@@ -20,6 +20,16 @@ namespace RomanNumbersTests
     [InlineData(10, "X")]
     [InlineData(40, "XL")]
     [InlineData(44, "XLIV")]
+    [InlineData(50, "L")]
+    [InlineData(90, "XC")]
+    [InlineData(100, "C")]
+    [InlineData(400, "CD")]
+    [InlineData(500, "D")]
+    [InlineData(900, "CM")]
+    [InlineData(1000, "M")]
+    [InlineData(846, "DCCCXLVI")]
+    [InlineData(1999, "MCMXCIX")]
+    [InlineData(2008, "MMVIII")]
     public void ShouldConvertArabicNumber(int arabicNumber, string expectedRomanNumber)
     {
       var converter = new ToRomanNumberConverter();
@@ -33,8 +43,15 @@ namespace RomanNumbersTests
   public class ToRomanNumberConverter
   {
     // Reversed mapping to be able to loop forward and not in reverse order
-    public static readonly IDictionary<int, string> RomanNumbers = new Dictionary<int, string>
+    public static readonly IDictionary<int, string> ArabicsToRomans = new Dictionary<int, string>
     {
+      {1000, "M"},
+      {900, "CM"},
+      {500, "D"},
+      {400, "CD"},
+      {100, "C"},
+      {90, "XC"},
+      {50, "L"},
       {40, "XL"},
       {10, "X"},
       {9, "IX"},
@@ -45,19 +62,21 @@ namespace RomanNumbersTests
 
     public string Convert(int arabicNumber)
     {
-      string romanNumber = string.Empty;
+      var romanNumber = string.Empty;
 
-      using var mappings = RomanNumbers.GetEnumerator();
+      using var mappings = ArabicsToRomans.GetEnumerator();
       while (mappings.MoveNext())
       {
-        var map = mappings.Current;
-        while (arabicNumber >= map.Key)
+        var arabicToRoman = mappings.Current;
+        var arabicNumeral = arabicToRoman.Key;
+        var romanNumeral = arabicToRoman.Value;
+
+        while (arabicNumber >= arabicNumeral)
         {
-          romanNumber += map.Value;
-          arabicNumber -= map.Key;
+          romanNumber += romanNumeral;
+          arabicNumber -= arabicNumeral;
         }
       }
-
       return romanNumber;
     }
   }
