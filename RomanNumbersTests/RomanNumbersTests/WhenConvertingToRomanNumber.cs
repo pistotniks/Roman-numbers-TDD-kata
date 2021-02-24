@@ -64,11 +64,8 @@ namespace RomanNumbersTests
     {
       var romanNumber = string.Empty;
 
-      foreach (var arabicToRoman in ArabicsToRomans)
+      foreach (var (arabicNumeral, romanNumeral) in ArabicsToRomans)
       {
-        var arabicNumeral = arabicToRoman.Key;
-        var romanNumeral = arabicToRoman.Value;
-
         while (arabicNumber >= arabicNumeral)
         {
           romanNumber += romanNumeral;
