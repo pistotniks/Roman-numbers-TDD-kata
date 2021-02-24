@@ -22,21 +22,11 @@ namespace RomanNumbersTests
 
   public class ToRomanNumberConverter
   {
+    public static readonly string[] RomanNumbers = { "I", "II", "III" };
+
     public string Convert(int arabicNumber)
     {
-      string romanNumber = "I";
-
-      if (arabicNumber > 1)
-      {
-        romanNumber += "I";
-      }
-
-      if (arabicNumber > 2)
-      {
-        romanNumber += "I";
-      }
-
-      return romanNumber;
+      return RomanNumbers[arabicNumber - 1];
     }
   }
 }
