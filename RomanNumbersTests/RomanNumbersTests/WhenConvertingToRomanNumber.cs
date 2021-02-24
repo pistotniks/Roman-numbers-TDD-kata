@@ -23,7 +23,7 @@ namespace RomanNumbersTests
   {
     public string Convert(int arabicNumber)
     {
-      return null;
+      return "I";
     }
   }
 }
