@@ -6,12 +6,11 @@ namespace RomanNumbersTests
 {
   public class WhenConvertingToRomanNumber
   {
-    [Fact]
-    public void ShouldConvertArabicNumber()
+    [Theory()]
+    [InlineData(1, "I")]
+    public void ShouldConvertArabicNumber(int arabicNumber, string expectedRomanNumber)
     {
       var converter = new ToRomanNumberConverter();
-      const int arabicNumber = 1;
-      const string expectedRomanNumber = "I";
 
       var romanNumber = converter.Convert(arabicNumber);
 
