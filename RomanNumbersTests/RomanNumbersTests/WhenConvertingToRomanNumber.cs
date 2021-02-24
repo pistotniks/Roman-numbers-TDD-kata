@@ -64,10 +64,8 @@ namespace RomanNumbersTests
     {
       var romanNumber = string.Empty;
 
-      using var mappings = ArabicsToRomans.GetEnumerator();
-      while (mappings.MoveNext())
+      foreach (var arabicToRoman in ArabicsToRomans)
       {
-        var arabicToRoman = mappings.Current;
         var arabicNumeral = arabicToRoman.Key;
         var romanNumeral = arabicToRoman.Value;
 
