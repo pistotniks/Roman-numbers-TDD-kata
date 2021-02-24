@@ -32,50 +32,32 @@ namespace RomanNumbersTests
 
   public class ToRomanNumberConverter
   {
+    // Reversed mapping to be able to loop forward and not in reverse order
     public static readonly IDictionary<int, string> RomanNumbers = new Dictionary<int, string>
     {
-      {1, "I"},
-      {4, "IV"},
-      {5, "V"},
-      {9, "IX"},
-      {10, "X"},
       {40, "XL"},
+      {10, "X"},
+      {9, "IX"},
+      {5, "V"},
+      {4, "IV"},
+      {1, "I"},
     };
 
     public string Convert(int arabicNumber)
     {
-      if (RomanNumbers.ContainsKey(arabicNumber))
-      {
-        return RomanNumbers[arabicNumber];
-      }
-
       string romanNumber = string.Empty;
 
-      while (arabicNumber >= 40)
+      using var mappings = RomanNumbers.GetEnumerator();
+      while (mappings.MoveNext())
       {
-        romanNumber += "XL";
-        arabicNumber -= 40;
+        var map = mappings.Current;
+        while (arabicNumber >= map.Key)
+        {
+          romanNumber += map.Value;
+          arabicNumber -= map.Key;
+        }
       }
-      while (arabicNumber >= 10)
-      {
-        romanNumber += "X";
-        arabicNumber -= 10;
-      }
-      while (arabicNumber >= 5)
-      {
-        romanNumber += "V";
-        arabicNumber -= 5;
-      }
-      while (arabicNumber >= 4)
-      {
-        romanNumber += "IV";
-        arabicNumber -= 4;
-      }
-      while (arabicNumber >= 1)
-      {
-        romanNumber += "I";
-        arabicNumber -= 1;
-      }
+
       return romanNumber;
     }
   }
