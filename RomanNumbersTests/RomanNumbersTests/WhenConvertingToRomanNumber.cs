@@ -16,6 +16,10 @@ namespace RomanNumbersTests
     [InlineData(6, "VI")]
     [InlineData(7, "VII")]
     [InlineData(8, "VIII")]
+    [InlineData(9, "IX")]
+    [InlineData(10, "X")]
+    [InlineData(40, "XL")]
+    [InlineData(44, "XLIV")]
     public void ShouldConvertArabicNumber(int arabicNumber, string expectedRomanNumber)
     {
       var converter = new ToRomanNumberConverter();
@@ -33,6 +37,9 @@ namespace RomanNumbersTests
       {1, "I"},
       {4, "IV"},
       {5, "V"},
+      {9, "IX"},
+      {10, "X"},
+      {40, "XL"},
     };
 
     public string Convert(int arabicNumber)
@@ -40,6 +47,17 @@ namespace RomanNumbersTests
       if (RomanNumbers.ContainsKey(arabicNumber))
       {
         return RomanNumbers[arabicNumber];
+      }
+
+      if (arabicNumber > 40)
+      {
+        const string result = "XL";
+        return result + Convert(arabicNumber - 40);
+      }
+      if (arabicNumber > 10)
+      {
+        const string result = "X";
+        return result + Convert(arabicNumber - 10);
       }
 
       if (arabicNumber > 5)
