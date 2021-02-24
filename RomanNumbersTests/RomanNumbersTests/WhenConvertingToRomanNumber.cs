@@ -49,23 +49,34 @@ namespace RomanNumbersTests
         return RomanNumbers[arabicNumber];
       }
 
-      if (arabicNumber > 40)
-      {
-        const string result = "XL";
-        return result + Convert(arabicNumber - 40);
-      }
-      if (arabicNumber > 10)
-      {
-        const string result = "X";
-        return result + Convert(arabicNumber - 10);
-      }
+      string romanNumber = string.Empty;
 
-      if (arabicNumber > 5)
+      while (arabicNumber >= 40)
       {
-        const string result = "V";
-        return result + Convert(arabicNumber - 5);
+        romanNumber += "XL";
+        arabicNumber -= 40;
       }
-      return RomanNumbers[1] + Convert(arabicNumber - 1);
+      while (arabicNumber >= 10)
+      {
+        romanNumber += "X";
+        arabicNumber -= 10;
+      }
+      while (arabicNumber >= 5)
+      {
+        romanNumber += "V";
+        arabicNumber -= 5;
+      }
+      while (arabicNumber >= 4)
+      {
+        romanNumber += "IV";
+        arabicNumber -= 4;
+      }
+      while (arabicNumber >= 1)
+      {
+        romanNumber += "I";
+        arabicNumber -= 1;
+      }
+      return romanNumber;
     }
   }
 }
