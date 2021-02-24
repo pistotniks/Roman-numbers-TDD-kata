@@ -12,7 +12,6 @@ namespace RomanNumbersTests
     [InlineData(2, "II")]
     [InlineData(3, "III")]
     [InlineData(4, "IV")]
-
     [InlineData(5, "V")]
     [InlineData(6, "VI")]
     [InlineData(7, "VII")]
@@ -34,9 +33,6 @@ namespace RomanNumbersTests
       {1, "I"},
       {4, "IV"},
       {5, "V"},
-      {6, "VI"},
-      {7, "VII"},
-      {8, "VIII"},
     };
 
     public string Convert(int arabicNumber)
@@ -44,6 +40,12 @@ namespace RomanNumbersTests
       if (RomanNumbers.ContainsKey(arabicNumber))
       {
         return RomanNumbers[arabicNumber];
+      }
+
+      if (arabicNumber > 5)
+      {
+        const string result = "V";
+        return result + Convert(arabicNumber - 5);
       }
       return RomanNumbers[1] + Convert(arabicNumber - 1);
     }
